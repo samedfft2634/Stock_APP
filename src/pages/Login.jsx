@@ -8,15 +8,31 @@ import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
+import { Formik, Form } from "formik";
+import { object, string } from "yup";
 
 const Login = () => {
+	const loginSchema = object({
+		email: string()
+			.email("Email must be a valid email!")
+			.required("Email is a required field!"),
+		password: string()
+			.required("Password is a required field!")
+			.min(8, "Password must be at least 8 characters !")
+			.max(16, "Password must be at most 16 characters !")
+            .matches(/\d+/,"The password must contain at least one number!")
+            .matches(/[a-z]/,"Password must contains at least one lowercase letter!")
+            .matches(/[A-Z]/,"Password must contains at least one uppercase letter!")
+            .matches(/[@$!%*?&]+/,"Password must contain at least one special character! (@ / $ / ! / % / * / ? / & )")
+            ,
+	});
 	return (
 		<Container maxWidth="lg">
 			<Grid
 				container
 				justifyContent="center"
 				direction="row-reverse"
-				sx={{ height: "100vh", p: 2 }}
+				sx={{ height: "95vh", p: 2 }}
 			>
 				<Grid item xs={12} mb={3}>
 					<Typography variant="h3" color="primary" align="center">
@@ -37,45 +53,88 @@ const Login = () => {
 					<Typography
 						variant="h4"
 						align="center"
-						mb={4}
+						mb={2}
 						color="#3DD980"
 					>
 						Login
 					</Typography>
-					<Box
-						component="form"
-						sx={{
-							display: "flex",
-							flexDirection: "column",
-							gap: 2,
+					<Formik
+						initialValues={{ email: "", password: "" }}
+						validationSchema={loginSchema}
+						onSubmit={(values, actions) => {
+							//|TODO: login(post) request,
+
+							actions.resetForm();
+							actions.setSubmitting(false); //? isSubmitting
+							//? navigation
+							//? toastify
+							//? if login successfully, send values to global state
+							//? form resetting
 						}}
 					>
-						<TextField
-							label="Email"
-							name="email"
-							id="email"
-							type="email"
-							variant="filled"
-							color="success"
-						></TextField>
-						<TextField
-							label="Password"
-							name="password"
-							id="password"
-							type="password"
-							variant="filled"
-							color="success"
-						/>
-						<Button
-							variant="contained"
-							type="submit"
-							color="success"
-						>
-							Submit
-						</Button>
-					</Box>
+						{({
+							handleChange,
+							values,
+							touched,
+							errors,
+							handleBlur,
+						}) => (
+							<Form>
+								<Box
+									sx={{
+										display: "flex",
+										flexDirection: "column",
+										gap: 2,
+									}}
+								>
+									<TextField
+										label="Email"
+										name="email"
+										id="email"
+										type="email"
+										variant="filled"
+										color="success"
+										value={values.email}
+										onBlur={handleBlur}
+										onChange={handleChange}
+										error={
+											touched.email &&
+											Boolean(errors.email)
+										}
+										helperText={touched.email && errors.email}
+									></TextField>
+									<TextField
+										label="Password"
+										name="password"
+										id="password"
+										type="password"
+										variant="filled"
+										color="success"
+										value={values.password}
+										onBlur={handleBlur}
+										onChange={handleChange}
+										error={
+											touched.password &&
+											Boolean(errors.password)
+										}
+										helperText={touched.password && errors.password}
+									/>
+									<Button
+										variant="contained"
+										type="submit"
+										color="success"
+									>
+										Submit
+									</Button>
+								</Box>
+							</Form>
+						)}
+					</Formik>
+
 					<Box sx={{ textAlign: "center", mt: 2 }}>
-						{/* <Link to="/register">Don't you have an account?</Link> */}
+						<Link to="/register" style={{ textDecoration: "none" }}>
+							Don't you have an account?
+						</Link>
 					</Box>
 				</Grid>
 				<Grid item xs={10} sm={7} md={6}>
