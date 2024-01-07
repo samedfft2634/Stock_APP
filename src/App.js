@@ -2,6 +2,8 @@ import { blueGrey, grey } from "@mui/material/colors";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import AppRouter from "./router/AppRouter";
 
 function App() {
 	const theme = createTheme({
@@ -16,8 +18,7 @@ function App() {
 	});
 	return (
 		<ThemeProvider theme={theme}>
-			{/* <Login /> */}
-      <Register />
+      <AppRouter />
 		</ThemeProvider>
 	);
 }
