@@ -97,7 +97,6 @@ const Register = () => {
 						}) => (
 							<Form>
 								<Box
-									component="form"
 									sx={{
 										display: "flex",
 										flexDirection: "column",
