@@ -6,10 +6,11 @@ import Toolbar from "@mui/material/Toolbar"
 import Button from "@mui/material/Button"
 import Typography from "@mui/material/Typography"
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
+import { useSelector } from "react-redux"
 
 
 const Dashboard = () => {
-    const currentUser = true // static for now
+    const {user} = useSelector(state => state.auth)
   return (
     <Box sx={{display:"flex"}}>
         <CssBaseline />
@@ -19,7 +20,7 @@ const Dashboard = () => {
                 <Typography variant="h6" component="div" sx={{flexGrow:1}}>
                     STOCK APP
                 </Typography>
-                {currentUser && <Button color="inherit" sx={{display:"flex",gap:1}}>Logout<ExitToAppIcon/></Button>}
+                {user && <Button color="inherit" sx={{display:"flex",gap:1}}>Logout<ExitToAppIcon/></Button>}
             </Toolbar>
         </AppBar>
     </Box>
