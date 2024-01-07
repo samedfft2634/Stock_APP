@@ -10,8 +10,10 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import { object, string } from "yup";
+import useAuthCall from "../service/useAuthCall";
 
 const Register = () => {
+	const {register} = useAuthCall()
 	const registerSchema = object({
 		email: string()
 			.email("Email must be a valid email!")
@@ -84,6 +86,7 @@ const Register = () => {
 						}}
 						validationSchema={registerSchema}
 						onSubmit={(values, actions) => {
+							register(values)
 							actions.resetForm();
 							actions.setSubmitting(false);
 						}}

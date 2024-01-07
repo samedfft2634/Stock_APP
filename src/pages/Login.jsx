@@ -64,14 +64,9 @@ const Login = () => {
 						initialValues={{ email: "", password: "" }}
 						validationSchema={loginSchema}
 						onSubmit={(values, actions) => {
-							//|TODO: login(post) request,
                             login(values)
 							actions.resetForm();
 							actions.setSubmitting(false); //? isSubmitting
-							//? navigation
-							//? toastify
-							//? if login successfully, send values to global state
-							//? form resetting
 						}}
 					>
 						{({
