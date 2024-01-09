@@ -26,8 +26,8 @@ const authSlice = createSlice({
 		},
 		logoutSuccess: (state) => {
 			state.loading = false;
-			state.user = null
-      state.token = null
+			state.user.username = "";
+			state.token = "";
 		},
 		fetchFail: (state) => {
 			state.loading = false;
