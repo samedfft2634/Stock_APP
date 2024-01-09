@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import {
 	fetchFail,
@@ -16,7 +16,7 @@ const useAuthCall = () => {
 	const {axiosWithToken, axiosPublic} = useAxios()
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const {token} = useSelector(state=>state.auth)
+	// const {token} = useSelector(state=>state.auth)
 	const login = async (userInfo) => {
 		dispatch(fetchStart());
 		try {
