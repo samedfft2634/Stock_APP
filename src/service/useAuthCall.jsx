@@ -8,11 +8,12 @@ import {
 	logoutSuccess,
 	registerSuccess,
 } from "../features/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const useAuthCall = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const {token} = useSelector(state=>state.auth)
 	const login = async (userInfo) => {
 		dispatch(fetchStart());
 		try {
@@ -47,10 +48,10 @@ const useAuthCall = () => {
 	};
 	const logout = async () => {
 		try {
-			const { data } = await axios.post(
+			await axios.post(
 				`${process.env.REACT_APP_BASE_URL}/auth/logout`,
 				{
-					headers: { Authorization: `Token ${myToken}` },
+					headers: { Authorization: `Token ${token}` },
 				}
 			);
 			dispatch(logoutSuccess());
