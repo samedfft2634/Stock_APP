@@ -10,6 +10,7 @@ import InventoryIcon from "@mui/icons-material/Inventory";
 import StoreIcon from "@mui/icons-material/Store";
 import StarsIcon from "@mui/icons-material/Stars";
 import { useNavigate } from "react-router-dom";
+import { drawerStyles } from "../styles/globalStyles";
 
 const icons = [
 	{
@@ -55,20 +56,7 @@ const MenuListItems = () => {
 					onClick={() => navigate(item.url)}
 				>
 					<ListItemButton
-						sx={{
-							"& .MuiListItemIcon-root, & .MuiListItemText-primary":
-								{
-									color: "white",  
-								},
-							"&:hover .MuiListItemIcon-root, &:hover .MuiListItemText-primary":
-								{
-									color: "red", 
-								},
-							"&:active .MuiListItemIcon-root, &:active .MuiListItemText-primary":
-								{
-									color: "#29A5F2", 
-								},
-						}}
+						sx={drawerStyles}
 					>
 						<ListItemIcon>{item.icon}</ListItemIcon>
 						<ListItemText primary={item.title} />
