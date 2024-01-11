@@ -12,3 +12,7 @@ export const drawerStyles = {
 									color: "#29A5F2", 
 								}
 }
+
+export const btnStyles = {
+	"&:hover":{color:"red",cursor:"pointer"},
+}
