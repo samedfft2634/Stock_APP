@@ -6,13 +6,13 @@ import LockIcon from "@mui/icons-material/Lock";
 import image from "../assets/register.svg";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
-import { Formik} from "formik";
-import useAuthCall from "../service/useAuthCall";
+import { Formik } from "formik";
+import useAuthCall from "../service/useAuthCalls";
 import RegisterForm, { registerSchema } from "../components/RegisterForm";
 
 const Register = () => {
-	const {register} = useAuthCall()
-	
+	const { register } = useAuthCall();
+
 	return (
 		<Container maxWidth="lg">
 			<Grid
@@ -60,11 +60,11 @@ const Register = () => {
 						}}
 						validationSchema={registerSchema}
 						onSubmit={(values, actions) => {
-							register(values)
+							register(values);
 							actions.resetForm();
 							actions.setSubmitting(false);
 						}}
-						component={(props)=> <RegisterForm {...props} />}
+						component={(props) => <RegisterForm {...props} />}
 					></Formik>
 
 					<Box sx={{ textAlign: "center", mt: 2 }}>

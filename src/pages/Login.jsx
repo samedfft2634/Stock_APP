@@ -10,10 +10,10 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { Formik, Form } from "formik";
 import { object, string } from "yup";
-import useAuthCall from "../service/useAuthCall"
+import useAuthCall from "../service/useAuthCalls";
 
 const Login = () => {
-    const {login} = useAuthCall()
+	const { login } = useAuthCall();
 	const loginSchema = object({
 		email: string()
 			.email("Email must be a valid email!")
@@ -22,11 +22,19 @@ const Login = () => {
 			.required("Password is a required field!")
 			.min(8, "Password must be at least 8 characters !")
 			.max(16, "Password must be at most 16 characters !")
-            .matches(/\d+/,"The password must contain at least one number!")
-            .matches(/[a-z]/,"Password must contains at least one lowercase letter!")
-            .matches(/[A-Z]/,"Password must contains at least one uppercase letter!")
-            .matches(/[@$!%*?&]+/,"Password must contain at least one special character! (@ / $ / ! / % / * / ? / & )")
-            ,
+			.matches(/\d+/, "The password must contain at least one number!")
+			.matches(
+				/[a-z]/,
+				"Password must contains at least one lowercase letter!"
+			)
+			.matches(
+				/[A-Z]/,
+				"Password must contains at least one uppercase letter!"
+			)
+			.matches(
+				/[@$!%*?&]+/,
+				"Password must contain at least one special character! (@ / $ / ! / % / * / ? / & )"
+			),
 	});
 	return (
 		<Container maxWidth="lg">
@@ -64,7 +72,7 @@ const Login = () => {
 						initialValues={{ email: "", password: "" }}
 						validationSchema={loginSchema}
 						onSubmit={(values, actions) => {
-                            login(values)
+							login(values);
 							actions.resetForm();
 							actions.setSubmitting(false); //? isSubmitting
 						}}
@@ -98,7 +106,9 @@ const Login = () => {
 											touched.email &&
 											Boolean(errors.email)
 										}
-										helperText={touched.email && errors.email}
+										helperText={
+											touched.email && errors.email
+										}
 									></TextField>
 									<TextField
 										label="Password"
@@ -114,7 +124,9 @@ const Login = () => {
 											touched.password &&
 											Boolean(errors.password)
 										}
-										helperText={touched.password && errors.password}
+										helperText={
+											touched.password && errors.password
+										}
 									/>
 									<Button
 										variant="contained"

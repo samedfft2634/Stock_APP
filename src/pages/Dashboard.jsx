@@ -12,7 +12,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import ExitToAppIcon from "@mui/icons-material/ExitToApp";
 import { useSelector } from "react-redux";
-import useAuthCall from "../service/useAuthCall";
+import useAuthCall from "../service/useAuthCalls";
 import MenuListItems from "../components/MenuListItems";
 import { Outlet } from "react-router-dom";
 
@@ -61,7 +61,7 @@ function Dashboard(props) {
 					>
 						<MenuIcon />
 					</IconButton>
-					<img src="/favicon.png" alt="logo" width="40"  />
+					<img src="/favicon.png" alt="logo" width="40" />
 					<Typography
 						variant="h6"
 						noWrap
@@ -71,17 +71,17 @@ function Dashboard(props) {
 						STOCK APP
 					</Typography>
 					{user && (
-					<Button
-                    onClick={logout}
-                    color="inherit"
-                    sx={{
-                      display: "flex",
-                      gap: 1,
-                      "&:hover": {
-                        color: "black", 
-                      }
-                    }}
-                  >
+						<Button
+							onClick={logout}
+							color="inherit"
+							sx={{
+								display: "flex",
+								gap: 1,
+								"&:hover": {
+									color: "black",
+								},
+							}}
+						>
 							Logout
 							<ExitToAppIcon />
 						</Button>
@@ -137,7 +137,7 @@ function Dashboard(props) {
 				}}
 			>
 				<Toolbar />
-                <Outlet />
+				<Outlet />
 			</Box>
 		</Box>
 	);
