@@ -33,7 +33,29 @@ const useStockCalls = () => {
             console.log(error);
         }
     }
-  return {getStocks,deleteStock}
+    const postStock = async(url="firms",info) =>{
+        dispatch(fetchStart())
+        try {
+            await axiosWithToken.post(`/${url}/`,info)
+            toastSuccessNotify(`${url} has been added! `)
+			getStocks(url)
+        } catch (error) {
+            dispatch(fetchFail())
+            toastErrorNotify(` An error occurred while adding  a ${url} record!`)
+        }
+    }
+    const putStock = async (url="firms",info) => {
+		dispatch(fetchStart());
+		try {
+			await axiosWithToken.put(`/${url}/${info._id}/`,info);
+			toastSuccessNotify(`${url} has been successfully updated!`);
+			getStocks(url)
+		} catch (error) {
+			dispatch(fetchFail());
+			toastErrorNotify(`An error occurred during the update`);
+		}
+	};
+  return {getStocks,deleteStock,postStock,putStock}
 }
 
 export default useStockCalls
