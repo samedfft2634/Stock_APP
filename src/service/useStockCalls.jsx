@@ -48,7 +48,7 @@ const useStockCalls = () => {
 		dispatch(fetchStart());
 		try {
 			await axiosWithToken.put(`/${url}/${info._id}/`,info);
-			toastSuccessNotify(`${url} has been successfully updated!`);
+			toastSuccessNotify(`${url.toUpperCase()} has been successfully updated!`);
 			getStocks(url)
 		} catch (error) {
 			dispatch(fetchFail());
