@@ -13,11 +13,10 @@ const Products = () => {
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const initialStates = {
+		categoryId: "",
+		brandId: "",
 		name: "",
-		phone: "",
-		address: "",
-		image: "",
-	}
+	};
 	const [info, setInfo] = useState(initialStates);
 	const handleClose = () => {
 		setOpen(false);
@@ -33,7 +32,12 @@ const Products = () => {
 			<Typography variant="h4" color="error" mb={3}>
 				Products
 			</Typography>
-			<Button variant="contained" onClick={handleOpen} color="success" sx={{mb:3}}>
+			<Button
+				variant="contained"
+				onClick={handleOpen}
+				color="success"
+				sx={{ mb: 3 }}
+			>
 				New Product
 			</Button>
 			<ProductModal
@@ -42,7 +46,7 @@ const Products = () => {
 				setInfo={setInfo}
 				info={info}
 			/>
-      <ProductTable />
+			<ProductTable />
 		</div>
 	);
 };

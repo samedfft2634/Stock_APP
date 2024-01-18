@@ -1,9 +1,10 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
+import { DataGrid, GridActionsCellItem, GridToolbar } from "@mui/x-data-grid";
 import { useSelector } from "react-redux";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import useStockCalls from "../service/useStockCalls";
+import { btnStyles } from "../styles/globalStyles";
 
 export default function ProductTable() {
 	const { products } = useSelector((state) => state.stock);
@@ -14,9 +15,11 @@ export default function ProductTable() {
 			headerName: "#",
 			description: "Product ID",
 			flex: 1.4,
+			minWidth:"100px",
 			align:"center",
 			headerAlign: "center",
 			sortable: false,
+			valueGetter: (params) => params.value.slice(-5),
 		},
 		{
 			field: "categoryId",
@@ -25,7 +28,7 @@ export default function ProductTable() {
 			align:"center",
 			headerAlign: "center",
 			valueGetter: (params) => {
-				console.log(params);
+				// console.log(params);
 				return params.row?.categoryId?.name;
 			},
 		},
@@ -53,6 +56,9 @@ export default function ProductTable() {
 			flex: 1.5,
 			align:"center",
 			headerAlign: "center",
+			valueGetter: (params) => {
+				return params.row?.quantity;
+			},
 		},
 		{
 			field: "actions",
@@ -68,6 +74,7 @@ export default function ProductTable() {
 					icon={<DeleteForeverIcon />}
 					onClick={() => deleteStock("products",params?.id)}
 					label="Delete"
+					sx={btnStyles}
 				/>,
 			],
 		},
@@ -92,6 +99,7 @@ export default function ProductTable() {
 				checkboxSelection
 				disableRowSelectionOnClick
 				getRowId={getRowId}
+				slots={{toolbar:GridToolbar}}
 			/>
 		</Box>
 	);
