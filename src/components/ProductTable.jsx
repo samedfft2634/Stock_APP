@@ -1,59 +1,80 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import { DataGrid } from "@mui/x-data-grid";
+import { DataGrid, GridActionsCellItem } from "@mui/x-data-grid";
 import { useSelector } from "react-redux";
-
-const columns = [
-	{
-		field: "_id",
-		headerName: "#",
-		flex: 1.4,
-		headerAlign: "center",
-		sortable: false,
-	},
-	{
-		field: "category",
-		headerName: "Category",
-		flex: 1,
-		headerAlign: "center",
-	},
-	{
-		field: "brands",
-		headerName: "Brands",
-		flex: 1.2,
-		headerAlign: "center",
-	},
-	{
-		field: "name",
-		headerName: "Name",
-		flex: 1.5,
-		headerAlign: "center",
-	},
-	{
-		field: "stock",
-		headerName: "Stock",
-		type: "number",
-		flex: 1.5,
-		headerAlign: "center",
-	},
-	{
-		field: "actions",
-		headerName: "Actions",
-		description: "This column has a value getter and is not sortable",
-		sortable: false,
-		headerAlign: "center",
-		flex: 0.6,
-		valueGetter: (params) =>
-			`${params.row.firstName || ""} ${params.row.lastName || ""}`,
-	},
-];
+import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import useStockCalls from "../service/useStockCalls";
 
 export default function ProductTable() {
 	const { products } = useSelector((state) => state.stock);
-
-    function getRowId(row) {
-        return row._id;
-      }
+	const { deleteStock } = useStockCalls();
+	const columns = [
+		{
+			field: "_id",
+			headerName: "#",
+			description: "Product ID",
+			flex: 1.4,
+			align:"center",
+			headerAlign: "center",
+			sortable: false,
+		},
+		{
+			field: "categoryId",
+			headerName: "Category",
+			flex: 1,
+			align:"center",
+			headerAlign: "center",
+			valueGetter: (params) => {
+				console.log(params);
+				return params.row?.categoryId?.name;
+			},
+		},
+		{
+			field: "brandId",
+			headerName: "Brands",
+			flex: 1.2,
+			align:"center",
+			headerAlign: "center",
+			valueGetter: (params) => {
+				return params.row?.brandId?.name;
+			},
+		},
+		{
+			field: "name",
+			headerName: "Name",
+			flex: 1.5,
+			align:"center",
+			headerAlign: "center",
+		},
+		{
+			field: "stock",
+			headerName: "Stock",
+			type: "number",
+			flex: 1.5,
+			align:"center",
+			headerAlign: "center",
+		},
+		{
+			field: "actions",
+			headerName: "Actions",
+			description: "This column has a value getter and is not sortable",
+			sortable: false,
+			headerAlign: "center",
+			align:"center",
+			flex: 0.6,
+			type: "actions",
+			getActions: (params) => [
+				<GridActionsCellItem
+					icon={<DeleteForeverIcon />}
+					onClick={() => deleteStock("products",params?.id)}
+					label="Delete"
+				/>,
+			],
+		},
+	];
+	function getRowId(row) {
+		return row._id;
+	}
 	return (
 		<Box sx={{ width: "100%" }}>
 			<DataGrid
@@ -67,10 +88,10 @@ export default function ProductTable() {
 						},
 					},
 				}}
-				pageSizeOptions={[5]}
+				pageSizeOptions={[5, 10, 15, 20]}
 				checkboxSelection
 				disableRowSelectionOnClick
-                getRowId={getRowId}
+				getRowId={getRowId}
 			/>
 		</Box>
 	);
