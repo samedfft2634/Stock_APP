@@ -12,15 +12,16 @@ const Products = () => {
 	const { products } = useSelector((state) => state.stock);
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
-	const [info, setInfo] = useState({
+	const initialStates = {
 		name: "",
 		phone: "",
 		address: "",
 		image: "",
-	});
+	}
+	const [info, setInfo] = useState(initialStates);
 	const handleClose = () => {
 		setOpen(false);
-		setInfo({ name: "", phone: "", address: "", image: "" });
+		setInfo(initialStates);
 	};
 	useEffect(() => {
 		getStocks("products");
