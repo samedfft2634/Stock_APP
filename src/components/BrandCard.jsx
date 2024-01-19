@@ -14,7 +14,7 @@ import { btnStyles } from "../styles/globalStyles"
 
 export default function BrandCard({ brand,handleOpen,setInfo }) {
     const {deleteStock} = useStockCalls()
-  const { address, image, name, phone, _id } = brand
+  
   return (
     <Card
       sx={{
@@ -30,14 +30,14 @@ export default function BrandCard({ brand,handleOpen,setInfo }) {
     >
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {name}
+          {brand?.name}
         </Typography>
       </CardContent>
       <CardMedia
         component="img"
-        alt={name}
+        alt={brand?.name}
         height="140"
-        image={image}
+        image={brand?.image}
         sx={{ objectFit: "contain" }}
       />
       <CardActions>
@@ -45,7 +45,7 @@ export default function BrandCard({ brand,handleOpen,setInfo }) {
           handleOpen()
           setInfo(brand)
         }} />
-        <DeleteOutlineIcon  sx={btnStyles} onClick={()=> deleteStock("firms",_id)} />
+        <DeleteOutlineIcon  sx={btnStyles} onClick={()=> deleteStock("firms",brand?._id)} />
       </CardActions>
     </Card>
   )

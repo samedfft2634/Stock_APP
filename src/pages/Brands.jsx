@@ -6,10 +6,11 @@ import { useSelector } from "react-redux";
 import Grid from "@mui/material/Grid";
 import BrandCard from "../components/BrandCard";
 import BrandModal from "../components/BrandModal";
+import  { BrandSkeleton, CardSkeleton, ErrorMsg, NoDataMsg } from "../components/DataFetchMsg";
 
 const Brands = () => {
 	const { getStocks } = useStockCalls();
-	const { brands } = useSelector((state) => state.stock);
+	const { brands,error,loading } = useSelector((state) => state.stock);
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const [info, setInfo] = useState({
@@ -18,7 +19,7 @@ const Brands = () => {
 	});
 	const handleClose = () => {
 		setOpen(false);
-		setInfo({ name: "",image: "" });
+		setInfo({ name: "", image: "" });
 	};
 	useEffect(() => {
 		getStocks("brands");
@@ -37,13 +38,26 @@ const Brands = () => {
 				setInfo={setInfo}
 				info={info}
 			/>
-			<Grid container gap={2} mt={3} justifyContent="center">
+
+			{error && <ErrorMsg />}
+			{loading && (<BrandSkeleton />)}
+			{!error && !loading && !brands.length && <NoDataMsg />}
+			{!error && !loading && brands.length > 0 && (
+				<Grid container gap={2} mt={3} justifyContent="center">
 				{brands?.map((brand) => (
 					<Grid item key={brand._id}>
-						<BrandCard brand={brand} handleOpen={handleOpen} info={info} setInfo={setInfo}/>
+						<BrandCard
+							brand={brand}
+							handleOpen={handleOpen}
+							info={info}
+							setInfo={setInfo}
+						/>
 					</Grid>
 				))}
 			</Grid>
+			)}
+
+			
 		</div>
 	);
 };

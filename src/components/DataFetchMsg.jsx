@@ -1,4 +1,4 @@
-import { Alert, Grid, Skeleton, Stack } from "@mui/material";
+import { Alert, Card, Grid, Skeleton, Stack } from "@mui/material";
 
 export const ErrorMsg = () => {
 	return (
@@ -17,11 +17,52 @@ export const NoDataMsg = () => {
 
 export const CardSkeleton = ({ children }) => {
 	return (
-		<Grid container justifyContent={"center"} alignItems={"center"} my={3} gap={3}>
-			{[1, 2, 3, 4,5,6].map((_,index) => (
-                <Grid item>
-                    <Skeleton variant="rectangular" key={index}>{children}</Skeleton>
-                </Grid>
+		<Grid
+			container
+			justifyContent={"center"}
+			alignItems={"center"}
+			my={3}
+			gap={3}
+		>
+			{[1, 2, 3, 4, 5, 6].map((_, index) => (
+				<Grid item>
+					<Skeleton variant="rectangular" key={index}>
+						{children}
+					</Skeleton>
+				</Grid>
+			))}
+		</Grid>
+	);
+};
+
+export const BrandSkeleton = () => {
+	return (
+		<Grid
+			container
+			justifyContent={"center"}
+			alignItems={"center"}
+			my={3}
+			gap={3}
+		>
+			{[1, 2, 3].map((_, index) => (
+				<Grid
+					item
+					sx={{
+						maxWidth: 345,
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+						justifyContent: "space-between",
+						width: "300px",
+						height: "400px",
+						p: 2,
+						gap: 2,
+					}}
+				>
+					<Skeleton variant="rectangular" width="50%" height={100} />
+					<Skeleton variant="rectangular" width="100%" height={300} />
+					<Skeleton variant="rectangular" width="40%" height={100} />
+				</Grid>
 			))}
 		</Grid>
 	);
