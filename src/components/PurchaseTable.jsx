@@ -42,7 +42,7 @@ const PurchaseTable = () => {
 		{
 			field: "name",
 			headerName: "Name",
-			flex: 1.5,
+			flex: 2.2,
 			headerAlign: "center",
 			align: "center",
 		},
@@ -50,7 +50,7 @@ const PurchaseTable = () => {
 			field: "quantity",
 			headerName: "Stock",
 			type: "number",
-			flex: 1.5,
+			flex: 1,
 			headerAlign: "center",
 			align: "center",
 		},

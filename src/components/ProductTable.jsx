@@ -45,7 +45,7 @@ export default function ProductTable() {
 		{
 			field: "name",
 			headerName: "Name",
-			flex: 1.5,
+			flex: 2.2,
 			align:"center",
 			headerAlign: "center",
 		},

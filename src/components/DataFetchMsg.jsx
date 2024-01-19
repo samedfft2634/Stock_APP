@@ -2,7 +2,7 @@ import { Alert, Box, Card, Grid, Skeleton, Stack } from "@mui/material";
 
 export const ErrorMsg = () => {
 	return (
-		<Alert severity="error" sx={{ my: 3 }}>
+		<Alert severity="error" variant="filled" sx={{ my: 3 }}>
 			Datas couldn't fetched!
 		</Alert>
 	);
