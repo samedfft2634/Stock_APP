@@ -8,7 +8,6 @@ import ProductTable from "../components/ProductTable";
 import { ErrorMsg, NoDataMsg } from "../components/DataFetchMsg";
 import TableSkeleton from "../components/DataFetchMsg";
 
-
 const Products = () => {
 	const { products, error, loading } = useSelector((state) => state.stock);
 	const { getStocks } = useStockCalls();
@@ -30,7 +29,7 @@ const Products = () => {
 		getStocks("brands");
 	}, []);
 	return (
-		<div>
+		<>
 			<Typography variant="h4" color="error" mb={3}>
 				Products
 			</Typography>
@@ -48,12 +47,12 @@ const Products = () => {
 				setInfo={setInfo}
 				info={info}
 			/>
-			
-			{error && <ErrorMsg /> }
+
+			{error && <ErrorMsg />}
 			{loading && <TableSkeleton />}
 			{!error && !products.length && <NoDataMsg />}
-			{!loading && products.length > 0  && !error && <ProductTable  />}
-		</div>
+			{!loading && products.length > 0 && !error && <ProductTable />}
+		</>
 	);
 };
 
