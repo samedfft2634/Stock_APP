@@ -1,4 +1,4 @@
-import { Alert, Card, Grid, Skeleton, Stack } from "@mui/material";
+import { Alert, Box, Card, Grid, Skeleton, Stack } from "@mui/material";
 
 export const ErrorMsg = () => {
 	return (
@@ -25,7 +25,7 @@ export const CardSkeleton = ({ children }) => {
 			gap={3}
 		>
 			{[1, 2, 3, 4, 5, 6].map((_, index) => (
-				<Grid item>
+				<Grid item key={index}>
 					<Skeleton variant="rectangular" key={index}>
 						{children}
 					</Skeleton>
@@ -47,6 +47,7 @@ export const BrandSkeleton = () => {
 			{[1, 2, 3].map((_, index) => (
 				<Grid
 					item
+					key={index}
 					sx={{
 						maxWidth: 345,
 						display: "flex",
@@ -70,11 +71,13 @@ export const BrandSkeleton = () => {
 
 const TableSkeleton = () => {
 	return (
-		<Stack spacing={1}>
-			<Skeleton variant="rectangular" width="100%" height={80} />
+		<Stack spacing={1} sx={{ marginLeft: "auto", marginRight: 0 }}>
+			<Skeleton variant="rectangular" width="100%" height={50} />
 			<Skeleton variant="rectangular" width="100%" height={40} />
-			<Skeleton variant="rectangular" width="100%" height={60} />
-			<Skeleton variant="rectangular" width="100%" height={60} />
+			<Skeleton variant="rectangular" width="100%" height={200} />
+			<Box display="flex" justifyContent="flex-end">
+				<Skeleton variant="rectangular" width="40%" height={40} />
+			</Box>
 		</Stack>
 	);
 };
