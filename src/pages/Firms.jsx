@@ -6,10 +6,15 @@ import { useSelector } from "react-redux";
 import FirmCard from "../components/FirmCard";
 import Grid from "@mui/material/Grid";
 import FirmModal from "../components/FirmModal";
+import TableSkeleton, {
+	CardSkeleton,
+	ErrorMsg,
+	NoDataMsg,
+} from "../components/DataFetchMsg";
 
 const Firms = () => {
 	const { getStocks } = useStockCalls();
-	const { firms } = useSelector((state) => state.stock);
+	const { firms, error, loading } = useSelector((state) => state.stock);
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const [info, setInfo] = useState({
@@ -39,13 +44,27 @@ const Firms = () => {
 				setInfo={setInfo}
 				info={info}
 			/>
-			<Grid container gap={2} mt={3} justifyContent="center">
-				{firms?.map((firm) => (
-					<Grid item key={firm._id}>
-						<FirmCard firm={firm} handleOpen={handleOpen} info={info} setInfo={setInfo}/>
-					</Grid>
-				))}
-			</Grid>
+			{error && <ErrorMsg />}
+			{loading && (
+				<CardSkeleton>
+					<FirmCard />
+				</CardSkeleton>
+			)}
+			{!error && !loading && !firms.length && <NoDataMsg />}
+			{!error && !loading && firms.length > 0 && (
+				<Grid container gap={2} mt={3} justifyContent="center">
+					{firms?.map((firm) => (
+						<Grid item key={firm._id}>
+							<FirmCard
+								firm={firm}
+								handleOpen={handleOpen}
+								info={info}
+								setInfo={setInfo}
+							/>
+						</Grid>
+					))}
+				</Grid>
+			)}
 		</div>
 	);
 };

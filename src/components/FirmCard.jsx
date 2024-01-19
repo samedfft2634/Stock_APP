@@ -14,7 +14,7 @@ import { btnStyles } from "../styles/globalStyles"
 
 export default function FirmCard({ firm,handleOpen,setInfo }) {
     const {deleteStock} = useStockCalls()
-  const { address, image, name, phone, _id } = firm
+
   return (
     <Card
       sx={{
@@ -30,22 +30,22 @@ export default function FirmCard({ firm,handleOpen,setInfo }) {
     >
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {name}
+          {firm?.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {address}
+          {firm?.address}
         </Typography>
       </CardContent>
       <CardMedia
         component="img"
-        alt={name}
+        alt={firm?.name}
         height="140"
-        image={image}
+        image={firm?.image}
         sx={{ objectFit: "contain" }}
       />
 
       <Typography variant="body2" color="text.secondary">
-        {phone}
+        {firm?.phone}
       </Typography>
 
       <CardActions>
@@ -53,7 +53,7 @@ export default function FirmCard({ firm,handleOpen,setInfo }) {
           handleOpen()
           setInfo(firm)
         }} />
-        <DeleteOutlineIcon  sx={btnStyles} onClick={()=> deleteStock("firms",_id)} />
+        <DeleteOutlineIcon  sx={btnStyles} onClick={()=> deleteStock("firms",firm?._id)} />
       </CardActions>
     </Card>
   )

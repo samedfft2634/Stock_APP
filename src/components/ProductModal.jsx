@@ -9,7 +9,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useSelector } from "react-redux";
 const ProductModal = ({ open, handleClose, info, setInfo }) => {
-	const { categories,brands } = useSelector((state) => state.stock);
+	const { categories, brands } = useSelector((state) => state.stock);
 	const { postStock } = useStockCalls();
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -101,3 +101,4 @@ const ProductModal = ({ open, handleClose, info, setInfo }) => {
 	);
 };
 export default ProductModal;
+

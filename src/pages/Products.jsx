@@ -3,13 +3,15 @@ import Button from "@mui/material/Button";
 import { useEffect, useState } from "react";
 import useStockCalls from "../service/useStockCalls";
 import { useSelector } from "react-redux";
-import Grid from "@mui/material/Grid";
 import ProductModal from "../components/ProductModal";
 import ProductTable from "../components/ProductTable";
+import { ErrorMsg, NoDataMsg } from "../components/DataFetchMsg";
+import TableSkeleton from "../components/DataFetchMsg";
+
 
 const Products = () => {
+	const { products, error, loading } = useSelector((state) => state.stock);
 	const { getStocks } = useStockCalls();
-	const { products } = useSelector((state) => state.stock);
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const initialStates = {
@@ -46,7 +48,11 @@ const Products = () => {
 				setInfo={setInfo}
 				info={info}
 			/>
-			<ProductTable />
+			
+			{error && <ErrorMsg /> }
+			{loading && <TableSkeleton />}
+			{!error && !products.length && <NoDataMsg />}
+			{!loading && products.length > 0  && !error && <ProductTable  />}
 		</div>
 	);
 };
