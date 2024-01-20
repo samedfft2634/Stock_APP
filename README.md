@@ -43,7 +43,6 @@ Stock App is a web-based application that allows you to track movements in the s
 - **Real-Time Stock Data:** Access up-to-the-minute information on stock prices, trends, and market news.
 - **Detailed Analysis:** Deep dive into the stocks with advanced analytical tools and charts.
 - **User-Friendly Interface:** Sleek and easy-to-use interface, making stock tracking a breeze.
-- **Portfolio Management:** Manage and track your investments effectively.
 - **Alerts and Notifications:** Stay updated with important market changes and notifications.
   
 
