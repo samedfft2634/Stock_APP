@@ -5,7 +5,8 @@ import PurchaseTable from "../components/PurchaseTable";
 import { Button, Container, Typography } from "@mui/material";
 import TableSkeleton, { ErrorMsg, NoDataMsg } from "../components/DataFetchMsg";
 import { useSelector } from "react-redux";
-import { getProPurBrandFirmSuccess } from "../features/stockSlice";
+import { Stack } from "@mui/system";
+
 
 const Purchases = () => {
 	const { getProPurBranFirm, getStocks,fetchData } = useStockCalls();
@@ -26,21 +27,26 @@ const Purchases = () => {
 	};
 
 	useEffect(() => {
-		// getStocks("products");
-		// getStocks("purchases");
-		// getStocks("brands");
-		// getStocks("firms");
-		// getProPurBranFirm()
-		fetchData(["/products", "/purchases", "/brands", "/firms"], getProPurBrandFirmSuccess);
+		getStocks("products");
+		getStocks("purchases");
+		getStocks("brands");
+		getStocks("firms");
 	}, []);
 	return (
 		<Container maxWidth="xl">
-			<Typography variant="h4" color="error" mb={3}>
-				Purchases
-			</Typography>
-			<Button variant="contained" color="success" onClick={handleOpen} sx={{my:2}}>
-				New Purchase
-			</Button>
+			<Stack justifyContent="space-between" direction="row">
+				<Typography variant="h4" color="error" mb={3}>
+					Purchases
+				</Typography>
+				<Button
+					variant="contained"
+					onClick={handleOpen}
+					color="success"
+					sx={{ mb: 3 }}
+				>
+					New Purchase
+				</Button>
+			</Stack>
 			<PurchaseModal
 				open={open}
 				handleClose={handleClose}

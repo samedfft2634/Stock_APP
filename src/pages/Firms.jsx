@@ -11,6 +11,7 @@ import TableSkeleton, {
 	ErrorMsg,
 	NoDataMsg,
 } from "../components/DataFetchMsg";
+import { Stack } from "@mui/system";
 
 const Firms = () => {
 	const { getStocks } = useStockCalls();
@@ -31,13 +32,21 @@ const Firms = () => {
 		getStocks("firms");
 	}, []);
 	return (
-		<div>
-			<Typography variant="h4" color="error" mb={3}>
-				Firms
-			</Typography>
-			<Button variant="contained" onClick={handleOpen} color="success">
-				New Firm
-			</Button>
+		<>
+			<Stack justifyContent="space-between" direction="row">
+				<Typography variant="h4" color="error" mb={3}>
+					Firms
+				</Typography>
+				<Button
+					variant="contained"
+					onClick={handleOpen}
+					color="success"
+					sx={{ mb: 3 }}
+				>
+					New Firm
+				</Button>
+			</Stack>
+
 			<FirmModal
 				open={open}
 				handleClose={handleClose}
@@ -65,7 +74,7 @@ const Firms = () => {
 					))}
 				</Grid>
 			)}
-		</div>
+		</>
 	);
 };
 
