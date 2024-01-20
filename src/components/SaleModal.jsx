@@ -124,7 +124,6 @@ const SaleModal = ({ open, handleClose, info, setInfo }) => {
 							type="number"
 							variant="filled"
 							color="success"
-
 							InputProps={{ inputProps: { min: 0 } }}
 							value={info?.quantity}
 							onChange={handleChange}
@@ -142,7 +141,12 @@ const SaleModal = ({ open, handleClose, info, setInfo }) => {
 							onChange={handleChange}
 							required
 						/>
-						<Button type="submit" variant="contained" size="large" color={info?._id ? "warning" : "success"}>
+						<Button
+							type="submit"
+							variant="contained"
+							size="large"
+							color={info?._id ? "warning" : "success "}
+						>
 							{info?._id ? "Update Sale" : "Add New Sale"}
 						</Button>
 					</Box>

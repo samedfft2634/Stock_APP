@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import useStockCalls from "../service/useStockCalls";
 import { Button, Container, Typography } from "@mui/material";
@@ -45,6 +46,7 @@ const Sales = () => {
 				</Button>
 			</Stack>
 
+
 			<SaleModal
 				open={open}
 				handleClose={handleClose}
@@ -52,14 +54,15 @@ const Sales = () => {
 				setInfo={setInfo}
 			/>
 
-			{error && <ErrorMsg />}
-			{loading && <TableSkeleton />}
-			{!loading && !sales?.length && <NoDataMsg />}
-			{!loading && sales?.length > 0 && (
-				<SaleTable setInfo={setInfo} handleOpen={handleOpen} />
-			)}
-		</Container>
-	);
-};
+      {error &&  <ErrorMsg />}
+      {loading && <TableSkeleton />}
+      {!loading && !sales?.length && !error && <NoDataMsg />}
+      {!loading && sales?.length > 0 && (
+        <SaleTable setInfo={setInfo} handleOpen={handleOpen} />
+      )}
+    </Container>
+  )
+}
+
 
 export default Sales;

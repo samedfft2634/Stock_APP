@@ -1,5 +1,5 @@
-"use client";
 
+"use client";
 import { Grid } from "@mui/material";
 import Container from "@mui/material/Container";
 import { AreaChart, Card, Title } from "@tremor/react";

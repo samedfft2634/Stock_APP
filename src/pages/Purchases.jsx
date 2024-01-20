@@ -7,8 +7,9 @@ import TableSkeleton, { ErrorMsg, NoDataMsg } from "../components/DataFetchMsg";
 import { useSelector } from "react-redux";
 import { Stack } from "@mui/system";
 
+
 const Purchases = () => {
-	const { getStocks } = useStockCalls();
+	const { getProPurBranFirm, getStocks,fetchData } = useStockCalls();
 	const { error, loading, purchases } = useSelector((state) => state.stock);
 	const [open, setOpen] = useState(false);
 	const initialState = {

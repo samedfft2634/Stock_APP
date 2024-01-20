@@ -9,6 +9,7 @@ import { ErrorMsg, NoDataMsg } from "../components/DataFetchMsg";
 import TableSkeleton from "../components/DataFetchMsg";
 import { Stack } from "@mui/system";
 
+
 const Products = () => {
 	const { products, error, loading } = useSelector((state) => state.stock);
 	const { getStocks } = useStockCalls();
