@@ -7,10 +7,11 @@ import ProductModal from "../components/ProductModal";
 import ProductTable from "../components/ProductTable";
 import { ErrorMsg, NoDataMsg } from "../components/DataFetchMsg";
 import TableSkeleton from "../components/DataFetchMsg";
+import { getProBraCatSuccess } from "../features/stockSlice";
 
 const Products = () => {
 	const { products, error, loading } = useSelector((state) => state.stock);
-	const { getStocks } = useStockCalls();
+	const { getStocks,getProBraCat,fetchData } = useStockCalls();
 	const [open, setOpen] = useState(false);
 	const handleOpen = () => setOpen(true);
 	const initialStates = {
@@ -24,9 +25,11 @@ const Products = () => {
 		setInfo(initialStates);
 	};
 	useEffect(() => {
-		getStocks("products");
-		getStocks("categories");
-		getStocks("brands");
+		// getStocks("products");
+		// getStocks("categories");
+		// getStocks("brands");
+		// getProBraCat()
+		fetchData(["/products", "/brands", "/categories"], getProBraCatSuccess);
 	}, []);
 	return (
 		<>

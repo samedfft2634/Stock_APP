@@ -10,7 +10,13 @@ const initialState = {
 	loading: false,
 	error: false,
 };
-
+const updateState = (state,payload,fields)=>{
+	state.loading = false
+	state.error = false;
+	fields.forEach((field,index)=>{
+		state[field] = payload[index]
+	})
+}
 const stockSlice = createSlice({
 	name: "stock",
 	initialState,
@@ -24,21 +30,37 @@ const stockSlice = createSlice({
 			state.loading = false;
 			state.error = false;
 		},
-		getProPurBrandFirmSuccess:(state,{payload})=>{
-			state.loading = false;
-			state.error = false;
-			state.products=payload[0].data
-			state.purchases=payload[1].data
-			state.brands=payload[2].data
-			state.firms=payload[3].data
+		getProPurBrandFirmSuccess: (state, { payload }) => {
+			updateState(state, payload, ["products", "purchases", "brands", "firms"]);
 		},
-		getProBraSalesSuccess:(state,{payload})=>{
-			state.loading = false;
-			state.error = false;
-			state.products=payload[0].data
-			state.brands=payload[1].data
-			state.sales=payload[2].data
+		getProBraSalesSuccess: (state, { payload }) => {
+			updateState(state, payload, ["products", "brands", "sales"]);
 		},
+		getProBraCatSuccess: (state, { payload }) => {
+			updateState(state, payload, ["products", "brands", "categories"]);
+		},
+		// getProPurBrandFirmSuccess:(state,{payload})=>{
+		// 	state.loading = false;
+		// 	state.error = false;
+		// 	state.products=payload[0].data
+		// 	state.purchases=payload[1].data
+		// 	state.brands=payload[2].data
+		// 	state.firms=payload[3].data
+		// },
+		// getProBraSalesSuccess:(state,{payload})=>{
+		// 	state.loading = false;
+		// 	state.error = false;
+		// 	state.products=payload[0].data
+		// 	state.brands=payload[1].data
+		// 	state.sales=payload[2].data
+		// },
+		// getProBraCatSuccess:(state,{payload})=>{
+		// 	state.loading = false;
+		// 	state.error = false;
+		// 	state.products=payload[0].data
+		// 	state.brands=payload[1].data
+		// 	state.categories=payload[2].data
+		// },
 		fetchFail: (state) => {
 			state.loading = false;
 			state.error = true;
@@ -46,6 +68,6 @@ const stockSlice = createSlice({
 	},
 });
 
-export const { fetchStart, fetchFail, getStocksSuccess,getProPurBrandFirmSuccess,getProBraSalesSuccess} = stockSlice.actions;
+export const { fetchStart, fetchFail, getStocksSuccess,getProPurBrandFirmSuccess,getProBraSalesSuccess,getProBraCatSuccess} = stockSlice.actions;
 
 export default stockSlice.reducer;

@@ -5,9 +5,10 @@ import PurchaseTable from "../components/PurchaseTable";
 import { Button, Container, Typography } from "@mui/material";
 import TableSkeleton, { ErrorMsg, NoDataMsg } from "../components/DataFetchMsg";
 import { useSelector } from "react-redux";
+import { getProPurBrandFirmSuccess } from "../features/stockSlice";
 
 const Purchases = () => {
-	const { getProPurBranFirm, getStocks } = useStockCalls();
+	const { getProPurBranFirm, getStocks,fetchData } = useStockCalls();
 	const { error, loading, purchases } = useSelector((state) => state.stock);
 	const [open, setOpen] = useState(false);
 	const initialState = {
@@ -29,7 +30,8 @@ const Purchases = () => {
 		// getStocks("purchases");
 		// getStocks("brands");
 		// getStocks("firms");
-		getProPurBranFirm()
+		// getProPurBranFirm()
+		fetchData(["/products", "/purchases", "/brands", "/firms"], getProPurBrandFirmSuccess);
 	}, []);
 	return (
 		<Container maxWidth="xl">

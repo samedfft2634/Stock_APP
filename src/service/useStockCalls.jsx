@@ -4,6 +4,7 @@ import useAxios from "./useAxios";
 import {
 	fetchFail,
 	fetchStart,
+	getProBraCatSuccess,
 	getProBraSalesSuccess,
 	getProPurBrandFirmSuccess,
 } from "../features/stockSlice";
@@ -12,6 +13,68 @@ import { getStocksSuccess } from "../features/stockSlice";
 const useStockCalls = () => {
 	const dispatch = useDispatch();
 	const { axiosWithToken } = useAxios();
+    // const getProPurBranFirm = async () => {
+    // 	dispatch(fetchStart());
+    // 	try {
+    // 		const [products, purchases, brands, firms] = await Promise.all([
+    // 			axiosWithToken("/products"),
+    // 			axiosWithToken("/purchases"),
+    // 			axiosWithToken("/brands"),
+    // 			axiosWithToken("/firms"),
+    // 		]);
+    // 		dispatch(
+    // 			getProPurBrandFirmSuccess([
+    // 				products?.data,
+    // 				purchases?.data,
+    // 				brands?.data,
+    // 				firms?.data,
+    // 			])
+    // 		);
+    // 	} catch (error) {
+    // 		dispatch(fetchFail());
+    // 		console.log(error);
+    // 	}
+    // };
+    // const getProBraSales = async () => {
+    // 	dispatch(fetchStart());
+    // 	try {
+    // 		const [products,  brands, sales] = await Promise.all([
+    // 			axiosWithToken("/products"),
+    // 			axiosWithToken("/brands"),
+    // 			axiosWithToken("/sales"),
+    // 		]);
+    // 		dispatch(
+    // 			getProBraSalesSuccess([
+    // 				products?.data,
+    // 				brands?.data,
+    // 				sales?.data,
+    // 			])
+    // 		);
+    // 	} catch (error) {
+    // 		dispatch(fetchFail());
+    // 		console.log(error);
+    // 	}
+    // };
+    // const getProBraCat = async () => {
+    // 	dispatch(fetchStart());
+    // 	try {
+    // 		const [products,  brands, categories] = await Promise.all([
+    // 			axiosWithToken("/products"),
+    // 			axiosWithToken("/brands"),
+    // 			axiosWithToken("/categories"),
+    // 		]);
+    // 		dispatch(
+    // 			getProBraCatSuccess([
+    // 				products?.data,
+    // 				brands?.data,
+    // 				categories?.data,
+    // 			])
+    // 		);
+    // 	} catch (error) {
+    // 		dispatch(fetchFail());
+    // 		console.log(error);
+    // 	}
+    // };
 
 	const getStocks = async (url = "firms") => {
 		dispatch(fetchStart());
@@ -25,48 +88,22 @@ const useStockCalls = () => {
 			console.log(error);
 		}
 	};
-	const getProPurBranFirm = async () => {
-		dispatch(fetchStart());
-		try {
-			const [products, purchases, brands, firms] = await Promise.all([
-				axiosWithToken("/products"),
-				axiosWithToken("/purchases"),
-				axiosWithToken("/brands"),
-				axiosWithToken("/firms"),
-			]);
-			dispatch(
-				getProPurBrandFirmSuccess([
-					products?.data,
-					purchases?.data,
-					brands?.data,
-					firms?.data,
-				])
-			);
-		} catch (error) {
-			dispatch(fetchFail());
-			console.log(error);
-		}
-	};
-	const getProBraSales = async () => {
-		dispatch(fetchStart());
-		try {
-			const [products,  brands, sales] = await Promise.all([
-				axiosWithToken("/producs"),
-				axiosWithToken("/brands"),
-				axiosWithToken("/sales"),
-			]);
-			dispatch(
-				getProBraSalesSuccess([
-					products?.data,
-					brands?.data,
-					sales?.data,
-				])
-			);
-		} catch (error) {
-			dispatch(fetchFail());
-			console.log(error);
-		}
-	};
+
+
+    const fetchData = async(endpoints,successAction)=>{
+        dispatch(fetchStart())
+        try {
+            const data = await Promise.all(
+                endpoints.map(endpoint => axiosWithToken(endpoint))
+            )
+            dispatch(successAction(data.map(response=> response?.data.data)))
+        } catch (error) {
+            dispatch(fetchFail());
+            console.log(error);
+        }
+    }
+
+
 	const deleteStock = async (url = "firms", id) => {
 		dispatch(fetchStart());
 		try {
@@ -107,7 +144,7 @@ const useStockCalls = () => {
 			toastErrorNotify(`An error occurred during the update`);
 		}
 	};
-	return { getStocks, deleteStock, postStock, putStock, getProPurBranFirm,getProBraSales };
+	return { getStocks, deleteStock, postStock, putStock, fetchData };
 };
 
 export default useStockCalls;

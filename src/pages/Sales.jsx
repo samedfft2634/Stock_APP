@@ -5,10 +5,11 @@ import SaleModal from "../components/SaleModal"
 import SaleTable from "../components/SaleTable"
 import TableSkeleton, { ErrorMsg, NoDataMsg } from "../components/DataFetchMsg"
 import { useSelector } from "react-redux"
+import { getProBraSalesSuccess } from "../features/stockSlice"
 
 
 const Sales = () => {
-  const { getStocks,getProBraSales } = useStockCalls()
+  const { getStocks,getProBraSales,fetchData } = useStockCalls()
   const { sales, loading, error } = useSelector((state) => state.stock)
   const [open, setOpen] = useState(false)
   const initialState = { brandId: "", productId: "", quantity: "", price: "" }
@@ -22,7 +23,8 @@ const Sales = () => {
     // getStocks("products")
     // getStocks("brands")
     // getStocks("sales")
-    getProBraSales()
+    // getProBraSales()
+    fetchData(["/products", "/brands", "/sales"], getProBraSalesSuccess);
   }, [])
 
   return (
