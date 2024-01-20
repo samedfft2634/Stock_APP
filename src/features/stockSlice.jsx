@@ -39,6 +39,9 @@ const stockSlice = createSlice({
 		getProBraCatSuccess: (state, { payload }) => {
 			updateState(state, payload, ["products", "brands", "categories"]);
 		},
+		getPurSalesSuccess:(state,{payload})=>{
+			updateState(state,payload,["purchases","sales"])
+		},
 		// getProPurBrandFirmSuccess:(state,{payload})=>{
 		// 	state.loading = false;
 		// 	state.error = false;
@@ -68,6 +71,6 @@ const stockSlice = createSlice({
 	},
 });
 
-export const { fetchStart, fetchFail, getStocksSuccess,getProPurBrandFirmSuccess,getProBraSalesSuccess,getProBraCatSuccess} = stockSlice.actions;
+export const { fetchStart, fetchFail, getStocksSuccess,getProPurBrandFirmSuccess,getProBraSalesSuccess,getProBraCatSuccess,getPurSalesSuccess} = stockSlice.actions;
 
 export default stockSlice.reducer;

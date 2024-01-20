@@ -32,7 +32,7 @@ const Sales = () => {
       <Typography variant="h4" color="error" mb={3}>
 				Sales
 			</Typography>
-      <Button variant="contained" onClick={handleOpen} color="success">
+      <Button variant="contained" onClick={handleOpen} color="success" sx={{my:2}}>
         New Sale
       </Button>
 
