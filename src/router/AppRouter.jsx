@@ -9,6 +9,7 @@ import Sales from "../pages/Sales";
 import Brands from "../pages/Brands";
 import Firms from "../pages/Firms";
 import Products from "../pages/Products";
+import NotFound from "../components/NotFound";
 
 const AppRouter = () => {
 	return (
@@ -26,6 +27,7 @@ const AppRouter = () => {
 						<Route path="products" element={<Products />} />
 					</Route>
 				</Route>
+				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</Router>
 	);
