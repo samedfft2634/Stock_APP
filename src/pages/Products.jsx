@@ -7,6 +7,7 @@ import ProductModal from "../components/ProductModal";
 import ProductTable from "../components/ProductTable";
 import { ErrorMsg, NoDataMsg } from "../components/DataFetchMsg";
 import TableSkeleton from "../components/DataFetchMsg";
+import { Stack } from "@mui/system";
 
 const Products = () => {
 	const { products, error, loading } = useSelector((state) => state.stock);
@@ -30,17 +31,20 @@ const Products = () => {
 	}, []);
 	return (
 		<>
-			<Typography variant="h4" color="error" mb={3}>
-				Products
-			</Typography>
-			<Button
-				variant="contained"
-				onClick={handleOpen}
-				color="success"
-				sx={{ mb: 3 }}
-			>
-				New Product
-			</Button>
+			<Stack justifyContent="space-between" direction="row">
+				<Typography variant="h4" color="error" mb={3}>
+					Products
+				</Typography>
+				<Button
+					variant="contained"
+					onClick={handleOpen}
+					color="success"
+					sx={{ mb: 3 }}
+				>
+					New Product
+				</Button>
+			</Stack>
+
 			<ProductModal
 				open={open}
 				handleClose={handleClose}

@@ -5,6 +5,7 @@ import SaleModal from "../components/SaleModal";
 import SaleTable from "../components/SaleTable";
 import TableSkeleton, { ErrorMsg, NoDataMsg } from "../components/DataFetchMsg";
 import { useSelector } from "react-redux";
+import { Stack } from "@mui/system";
 
 const Sales = () => {
 	const { getStocks } = useStockCalls();
@@ -30,17 +31,19 @@ const Sales = () => {
 
 	return (
 		<Container maxWidth="xl">
-			<Typography variant="h4" color="error" mb={3}>
-				Sales
-			</Typography>
-			<Button
-				variant="contained"
-				onClick={handleOpen}
-				color="success"
-				sx={{ my: 2 }}
-			>
-				New Sale
-			</Button>
+			<Stack justifyContent="space-between" direction="row">
+				<Typography variant="h4" color="error" mb={3}>
+					Sales
+				</Typography>
+				<Button
+					variant="contained"
+					onClick={handleOpen}
+					color="success"
+					sx={{ mb: 3 }}
+				>
+					New Sale
+				</Button>
+			</Stack>
 
 			<SaleModal
 				open={open}
