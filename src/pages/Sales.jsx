@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import useStockCalls from "../service/useStockCalls"
-import { Button, Container } from "@mui/material"
+import { Button, Container, Typography } from "@mui/material"
 import SaleModal from "../components/SaleModal"
 import SaleTable from "../components/SaleTable"
 import TableSkeleton, { ErrorMsg, NoDataMsg } from "../components/DataFetchMsg"
@@ -8,7 +8,7 @@ import { useSelector } from "react-redux"
 
 
 const Sales = () => {
-  const { getStocks } = useStockCalls()
+  const { getStocks,getProBraSales } = useStockCalls()
   const { sales, loading, error } = useSelector((state) => state.stock)
   const [open, setOpen] = useState(false)
   const initialState = { brandId: "", productId: "", quantity: "", price: "" }
@@ -19,13 +19,17 @@ const Sales = () => {
     setInfo(initialState)
   }
   useEffect(() => {
-    getStocks("products")
-    getStocks("sales")
-    getStocks("brands")
+    // getStocks("products")
+    // getStocks("brands")
+    // getStocks("sales")
+    getProBraSales()
   }, [])
 
   return (
     <Container maxWidth="xl">
+      <Typography variant="h4" color="error" mb={3}>
+				Sales
+			</Typography>
       <Button variant="contained" onClick={handleOpen} color="success">
         New Sale
       </Button>
@@ -37,9 +41,9 @@ const Sales = () => {
         setInfo={setInfo}
       />
 
-      {error && <ErrorMsg />}
+      {error &&  <ErrorMsg />}
       {loading && <TableSkeleton />}
-      {!loading && !sales?.length && <NoDataMsg />}
+      {!loading && !sales?.length && !error && <NoDataMsg />}
       {!loading && sales?.length > 0 && (
         <SaleTable setInfo={setInfo} handleOpen={handleOpen} />
       )}

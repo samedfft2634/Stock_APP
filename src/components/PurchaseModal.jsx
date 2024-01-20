@@ -25,7 +25,7 @@ const PurchaseModal = ({ open, handleClose, info, setInfo }) => {
 		}
 		handleClose();
 	};
-	console.log(info);
+	// console.log(info);
 
 	return (
 		<>
