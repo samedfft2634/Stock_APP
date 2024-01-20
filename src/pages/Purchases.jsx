@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import useStockCalls from "../service/useStockCalls";
 import PurchaseModal from "../components/PurchaseModal";
 import PurchaseTable from "../components/PurchaseTable";
-import { Button, Container } from "@mui/material";
+import { Button, Container, Typography } from "@mui/material";
 import TableSkeleton, { ErrorMsg, NoDataMsg } from "../components/DataFetchMsg";
 import { useSelector } from "react-redux";
 
@@ -32,7 +32,15 @@ const Purchases = () => {
 	}, []);
 	return (
 		<Container maxWidth="xl">
-			<Button variant="contained" color="success" onClick={handleOpen} sx={{my:2}}>
+			<Typography variant="h4" color="error" mb={3}>
+				Purchases
+			</Typography>
+			<Button
+				variant="contained"
+				color="success"
+				onClick={handleOpen}
+				sx={{ my: 2 }}
+			>
 				New Purchase
 			</Button>
 			<PurchaseModal
