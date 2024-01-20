@@ -36,7 +36,7 @@ const KPI = () => {
             color: amber[600],
         },
     ];
-    console.log(sales);
+    // console.log(sales);
 	return (
 		<Stack
 			justifyContent="center"
