@@ -1,4 +1,4 @@
-import { Alert, Box, Card, Grid, Skeleton, Stack } from "@mui/material";
+import { Alert, Box,  Grid, Skeleton, Stack } from "@mui/material";
 
 export const ErrorMsg = () => {
 	return (

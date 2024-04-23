@@ -62,7 +62,7 @@ module.exports = {
           },
           ring: {
             DEFAULT: colors.gray[800],
-          },
+          }, 
           content: {
             subtle: colors.gray[600],
             DEFAULT: colors.gray[500],
