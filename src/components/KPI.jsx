@@ -44,6 +44,7 @@ const KPI = () => {
 			flexWrap="wrap"
 			direction="row"
 			gap={2}
+			sx={{mb:5}}
 		>
 			{kpiData.map((item) => (
 				<Paper
