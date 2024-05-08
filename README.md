@@ -10,7 +10,7 @@
     
   <h3 align="center">Stock App</h3>
   <p align="center">
-    <a href="https://stock-app-rose.vercel.app/"><strong>🚀 Click Here for Live Demo 🚀 »</strong></a>
+    <a href="https://stock-api-nodejs.onrender.com"><strong>🚀 Click Here for Live Demo 🚀 »</strong></a>
     <br />
   </p>
 </div>
@@ -99,7 +99,7 @@ Follow these steps to get your development environment running:
 ## 📞 Contact
 
 Samed Fent: samed.fent1@gmail.com <br>
-Project Link: <a href="https://stock-app-rose.vercel.app/">Live</a> <br><br>
+Project Link: <a href="https://stock-api-nodejs.onrender.com">Live</a> <br><br>
  [🗂 View My Other Projects](https://github.com/samedfft2634?tab=repositories) <br><br>
  <a href="#readme-top">⏫ Back to Top ⏫</a>
 
